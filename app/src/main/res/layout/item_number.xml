@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:background="@drawable/shape_20"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/im_101"
-        android:id="@+id/image"/>
+        android:layout_weight="1"
+        app:srcCompat="@drawable/im_101" />
 
     <LinearLayout
-        android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
@@ -28,9 +28,5 @@
             android:text="Yong'in xavfsizlik xizmati"
             android:textSize="18sp"
             app:fontFamily="More Fonts..." />
-
     </LinearLayout>
-
-
-
 </LinearLayout>
