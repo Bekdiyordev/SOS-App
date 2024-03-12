@@ -1,8 +1,10 @@
 package uz.beko404.sosapp.ui
 
 import android.content.Context
+import android.content.Intent
 import android.media.AudioManager
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.content.ContextCompat.getSystemService
@@ -19,6 +21,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+        startActivity(intent)
         setupUI()
     }
 
