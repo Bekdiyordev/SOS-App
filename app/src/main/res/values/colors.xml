@@ -3,4 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="track_color">#F6F5FA</color>
+    <color name="switch_thumb">#252429</color>
 </resources>

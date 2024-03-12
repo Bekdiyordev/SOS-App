@@ -7,4 +7,7 @@
     <string name="sos">SOS</string>
     <string name="version">Versiya: </string>
     <string name="settings">Sozlamalar</string>
+    <string name="sos_number_title">SOS telefon raqam</string>
+    <string name="sms_number_title">Kimlarga sms yuborilsin?</string>
+    <string name="location_title">Joylashuvni nazorat qilish</string>
 </resources>

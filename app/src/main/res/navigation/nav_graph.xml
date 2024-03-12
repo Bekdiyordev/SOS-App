@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_numbersFragment"
+            app:destination="@id/numbersFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -53,4 +56,9 @@
         android:name="uz.beko404.sosapp.ui.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/numbersFragment"
+        android:name="uz.beko404.sosapp.ui.NumbersFragment"
+        android:label="fragment_numbers"
+        tools:layout="@layout/fragment_numbers" />
 </navigation>

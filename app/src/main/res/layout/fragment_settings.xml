@@ -23,4 +23,72 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
     </com.google.android.material.appbar.MaterialToolbar>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sos_number"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_12"
+        android:elevation="2dp"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:text="@string/sos_number_title"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_next" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sms_number"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_12"
+        android:elevation="2dp"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:text="@string/sms_number_title"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_next" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_12"
+        android:elevation="2dp"
+        android:fontFamily="@font/inter_medium"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="22dp"
+        android:text="@string/location_title"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:thumbIcon="@drawable/switch_thumb"
+        app:thumbIconSize="0dp"
+        app:thumbTint="@color/switch_thumb_color"
+        app:trackDecoration="@drawable/switch_track"
+        app:trackDecorationTint="@color/track_color" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_12"
+        android:elevation="2dp"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:text="@string/about"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_next" />
 </LinearLayout>
