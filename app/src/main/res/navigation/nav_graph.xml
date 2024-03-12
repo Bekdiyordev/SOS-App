@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="uz.beko404.sosapp.ui.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uz.beko404.sosapp.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="uz.beko404.sosapp.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_addSOSNumberFragment"
+            app:destination="@id/addSOSNumberFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_addSMSNumberFragment"
+            app:destination="@id/addSMSNumberFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSOSNumberFragment"
+        android:name="uz.beko404.sosapp.ui.AddSOSNumberFragment"
+        android:label="fragment_add_s_o_s_number"
+        tools:layout="@layout/fragment_add_s_o_s_number" />
+    <fragment
+        android:id="@+id/addSMSNumberFragment"
+        android:name="uz.beko404.sosapp.ui.AddSMSNumberFragment"
+        android:label="fragment_add_s_m_s_number"
+        tools:layout="@layout/fragment_add_s_m_s_number" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="uz.beko404.sosapp.ui.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+</navigation>

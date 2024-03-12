@@ -6,30 +6,21 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.NumbersFragment">
+    tools:context=".ui.SettingsFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/arrow_left"
-        app:navigationIconTint="@color/black">
+        app:navigationIcon="@drawable/arrow_left">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/inter_medium"
-            android:text="@string/numbers"
+            android:text="@string/settings"
             android:textColor="@color/black"
             android:textSize="16sp" />
     </com.google.android.material.appbar.MaterialToolbar>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_number" />
-
 </LinearLayout>
