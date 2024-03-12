@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.AddSOSNumberFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/arrow_left"
+        app:navigationIconTint="@color/black">
 
-</FrameLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/sos_number_title"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <com.vicmikhailau.maskededittext.MaskedEditText
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/input_shape"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="10dp"
+        android:hint="@string/phone"
+        android:inputType="numberDecimal"
+        android:digits="0123456789"
+        android:maxLines="1"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:mask="@string/phone_mask"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/input_shape"
+        android:backgroundTint="@color/blue"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</LinearLayout>

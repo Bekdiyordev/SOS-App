@@ -10,4 +10,9 @@
     <string name="sos_number_title">SOS telefon raqam</string>
     <string name="sms_number_title">Kimlarga sms yuborilsin?</string>
     <string name="location_title">Joylashuvni nazorat qilish</string>
+    <string name="phone">Telefon raqam</string>
+    <string name="save">Saqlash</string>
+    <string name="success">Telefon raqam qo\'shildi</string>
+    <string name="enter_number">Telefon raqamni to\'g\'ri formatda kiriting</string>
+    <string name="phone_mask">+### (##) ###-##-##</string>
 </resources>
