@@ -15,4 +15,5 @@
     <string name="success">Telefon raqam qo\'shildi</string>
     <string name="enter_number">Telefon raqamni to\'g\'ri formatda kiriting</string>
     <string name="phone_mask">+### (##) ###-##-##</string>
+    <string name="number">+998 99 500 61 23</string>
 </resources>
