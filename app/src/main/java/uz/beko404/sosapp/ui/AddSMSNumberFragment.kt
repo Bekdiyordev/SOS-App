@@ -39,8 +39,11 @@ class AddSMSNumberFragment : Fragment(R.layout.fragment_add_s_m_s_number) {
 
         save.setOnClickListener {
             if (number.text!!.isNotEmpty() && number.unMaskedText?.length == 12) {
-                Pref.setSMSNumber(Pref.getSMSNumber().plus("$+").plus(number.unMaskedText))
-                dataList.add(number.text.toString())
+                if (Pref.getSMSNumber().isEmpty())
+                    Pref.setSMSNumber(Pref.getSMSNumber().plus(number.unMaskedText))
+                else
+                    Pref.setSMSNumber(Pref.getSMSNumber().plus("$+").plus(number.unMaskedText))
+                dataList.add("+" + number.unMaskedText.toString())
                 adapter.submitList(dataList)
                 adapter.notifyDataSetChanged()
                 number.text!!.clear()
@@ -55,13 +58,13 @@ class AddSMSNumberFragment : Fragment(R.layout.fragment_add_s_m_s_number) {
     }
 
     private fun getNumbersStr(): String {
-        if (dataList.isEmpty())
-            return ""
         var string = ""
+        if (dataList.isEmpty())
+            return string
         dataList.forEach {
             string += it
             string += "$"
         }
-        return string.substring(0, string.indexOf("$"))
+        return string.substring(0, string.lastIndexOf("$"))
     }
 }
