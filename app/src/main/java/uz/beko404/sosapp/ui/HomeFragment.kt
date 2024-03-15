@@ -31,13 +31,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), SensorEventListener {
     private var last_x = 0f
     private var last_y = 0f
     private var last_z = 0f
-    private val SHAKE_THRESHOLD = 200
+    private val SHAKE_THRESHOLD = 500
 
     private lateinit var audioManager: AudioManager
     var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        childFragmentManager.beginTransaction().add(R.id.main_container, MapFragment()).commit()
         sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also { accelerometer ->
             sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)

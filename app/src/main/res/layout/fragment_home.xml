@@ -7,16 +7,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.HomeFragment">
 
-    <com.mapbox.maps.MapView
-        android:id="@+id/mapView"
+    <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:mapbox_cameraTargetLat="39.5"
-        app:mapbox_cameraTargetLng="-98.0"
-        app:mapbox_cameraZoom="2.0"
-        app:mapbox_cameraPitch="0.0"
-        app:mapbox_cameraBearing="0.0" />
-
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        tools:layout="@layout/fragment_map"
+        android:id="@+id/main_container"/>
     
     <LinearLayout
         android:layout_marginBottom="20dp"
