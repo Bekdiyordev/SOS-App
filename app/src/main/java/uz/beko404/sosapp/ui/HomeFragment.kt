@@ -5,10 +5,11 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import androidx.core.content.ContextCompat.getSystemService
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import uz.beko404.sosapp.R
@@ -20,14 +21,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding { FragmentHomeBinding.bind(it) }
 
     private lateinit var audioManager: AudioManager
-    private val PERMISSION_REQUEST_CODE = 123
+    var mediaPlayer: MediaPlayer? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-//        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-//        startActivity(intent)
         setupUI()
     }
 
@@ -49,16 +48,44 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         when (audioManager.ringerMode) {
             AudioManager.RINGER_MODE_SILENT -> {
                 audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-//                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
+                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
             }
 
             AudioManager.RINGER_MODE_VIBRATE -> {
                 audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
             }
 
-//            AudioManager.RINGER_MODE_NORMAL -> {
-//                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
-//            }
+            AudioManager.RINGER_MODE_NORMAL -> {
+                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
+            }
+        }
+//        val audioAttributes = AudioAttributes.Builder()
+//            .setUsage(AudioAttributes.USAGE_MEDIA)
+//            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+//            .build()
+//        mediaPlayer?.setAudioAttributes(audioAttributes)
+
+        playSound()
+    }
+
+    private fun playSound() {
+        if (mediaPlayer == null || !mediaPlayer!!.isPlaying) {
+            mediaPlayer = MediaPlayer.create(context, R.raw.sos_sound)
+            mediaPlayer?.start()
+        } else {
+            mediaPlayer?.release()
+            mediaPlayer = null
+        }
+
+        // Set maximum volume
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume, 0)
+
+        mediaPlayer?.setOnCompletionListener {
+            mediaPlayer?.release()
+            Toast.makeText(requireContext(), "Finish", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -76,7 +103,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_NOTIFICATION_POLICY_ACCESS) {
             if (resultCode == RESULT_OK) {

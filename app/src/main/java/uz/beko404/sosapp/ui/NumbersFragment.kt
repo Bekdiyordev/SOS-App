@@ -9,6 +9,7 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import androidx.navigation.fragment.findNavController
 import uz.beko404.sosapp.R
 import uz.beko404.sosapp.adapters.NumbersAdapter
 import uz.beko404.sosapp.databinding.FragmentNumbersBinding
@@ -38,7 +39,7 @@ class NumbersFragment : Fragment(R.layout.fragment_numbers) {
 
     private fun setupUI() = with(binding) {
         toolbar.setNavigationOnClickListener {
-
+            findNavController().navigateUp()
         }
         recycler.adapter = adapter
     }
