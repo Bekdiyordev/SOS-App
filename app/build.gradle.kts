@@ -52,4 +52,11 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("io.github.vicmikhailau:MaskedEditText:5.0.1")
+
+//    implementation ("org.osmdroid:osmdroid-android:6.1.18" )// Core library for map rendering
+//    implementation ("org.osmdroid:osmdroid-mapsforge:6.1.18") // Additional mapping functionality
+
+    implementation("com.mapbox.maps:android:11.2.0")
+
+
 }
