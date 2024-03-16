@@ -1,24 +1,32 @@
 package uz.beko404.sosapp.ui
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.provider.Settings
+import android.telephony.SmsManager
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import uz.beko404.sosapp.Pref
 import uz.beko404.sosapp.R
 import uz.beko404.sosapp.databinding.FragmentHomeBinding
 import uz.beko404.sosapp.viewBinding
@@ -77,19 +85,26 @@ class HomeFragment : Fragment(R.layout.fragment_home), SensorEventListener {
         // Vibrate the device
         val vibrator = requireActivity().getSystemService(VIBRATOR_SERVICE) as Vibrator
         vibrator.vibrate(2000)
+        call()
 
         // Show a toast
-        Toast.makeText(requireContext(), "Device Shaken!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Diqqat Zilzila. Ehtiyot bo'ling", Toast.LENGTH_SHORT).show()
     }
 
     override fun onPause() {
         super.onPause()
+        if (mediaPlayer != null)
+            mediaPlayer?.release()
         sensorManager.unregisterListener(this)
     }
 
     override fun onResume() {
         super.onResume()
-        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager.registerListener(
+            this,
+            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -108,7 +123,59 @@ class HomeFragment : Fragment(R.layout.fragment_home), SensorEventListener {
         }
 
         sos.setOnClickListener {
-            checkNotificationPolicyAccess()
+            playSound()
+//            sendSMS()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                checkNotificationPolicyAccess()
+            else
+                Toast.makeText(requireContext(), "Ushbu funksiya bu qurilmada ishlamaydi", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun call() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CALL_PHONE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CALL_PHONE),
+                PERMISSION_REQUEST_CALL
+            )
+        } else {
+            makePhoneCall(Pref.getNumber())
+        }
+    }
+
+    private fun makePhoneCall(number: String) {
+        val callIntent = Intent(Intent.ACTION_CALL)
+        callIntent.data = Uri.parse("tel:$number")
+        startActivity(callIntent)
+    }
+
+    private fun sendSMS() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.SEND_SMS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Permission granted, send SMS
+            val messageToSend =
+                "Men favqulotda holatga tushub qoldim. Iltimos sudlik bilan menga aloqaga chiqing yoki qutqaruv xizmatiga xabar bering."
+            if (Pref.getSMSNumber().isNotEmpty()) {
+                Pref.getSMSNumber().split("$").forEach {
+                    SmsManager.getDefault().sendTextMessage(it, null, messageToSend, null, null)
+                }
+                Toast.makeText(requireContext(), "SMS Yuborildi", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            // Request SMS permissions
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.SEND_SMS),
+                PERMISSION_REQUEST_SEND_SMS
+            )
         }
     }
 
@@ -129,8 +196,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), SensorEventListener {
                 audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
             }
         }
-
-        playSound()
     }
 
     private fun playSound() {
@@ -178,4 +243,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), SensorEventListener {
         }
     }
 
+    companion object {
+        private const val PERMISSION_REQUEST_SEND_SMS = 123
+        private const val PERMISSION_REQUEST_CALL = 1234
+    }
 }

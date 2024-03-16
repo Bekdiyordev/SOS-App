@@ -48,7 +48,6 @@ class MapFragment : Fragment(R.layout.fragment_map), PermissionsListener {
     private lateinit var permissionsManager: PermissionsManager
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -76,50 +75,23 @@ class MapFragment : Fragment(R.layout.fragment_map), PermissionsListener {
 
         map.setCamera(
             CameraOptions.Builder().center(
-                Point.fromLngLat(location.longitude, location.latitude)
+                Point.fromLngLat(60.391438, 41.841812)
             )
-                .zoom(if (sharedPref.latitude == 41.841812f && sharedPref.longitude == 60.391438f) 12.0 else 15.0)
+                .zoom(12.0)
                 .build()
         )
 
-        val style = when (sharedPref.mode) {
-            "night" -> Style.DARK
-            "light" -> Style.MAPBOX_STREETS
-            else -> {
-                when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                    Configuration.UI_MODE_NIGHT_YES -> Style.DARK
-                    Configuration.UI_MODE_NIGHT_NO -> Style.MAPBOX_STREETS
-                    else -> Style.MAPBOX_STREETS
-                }
-            }
-        }
+        val style =  Style.MAPBOX_STREETS
 
-        map.loadStyle(
-            (style(styleUri = style) {
-                mapView.gestures.addOnMoveListener(onMoveListener)
-                initLocationComponent()
-            })
-        )
 
-        mapView.location2.puckBearingSource = PuckBearingSource.HEADING
-        mapView.location2.puckBearingSource = PuckBearingSource.COURSE
         map.setBounds(CameraBoundsOptions.Builder().maxZoom(18.0).minZoom(8.0).build())
         mapView.attribution.enabled = false
         mapView.logo.enabled = false
-
-        launchAndRepeatWithViewLifecycle {
-            fromLongitude = map.cameraState.center.longitude()
-            fromLatitude = map.cameraState.center.latitude()
-            sharedViewModel.setStartAddress(LatLng(fromLatitude, fromLongitude))
-            viewModel.getStartAddressNameFromOpenStreet(fromLatitude, fromLongitude)
-        }
     }
 
+    override fun onExplanationNeeded(permissionsToExplain: List<String>) {
 
-
-
-
-
+    }
 
     override fun onPermissionResult(granted: Boolean) {
         if (granted) {
