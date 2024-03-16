@@ -24,8 +24,8 @@ class AddSMSNumberFragment : Fragment(R.layout.fragment_add_s_m_s_number) {
 
     private fun loadData() {
         dataList.clear()
-        if (Pref.getSMSNumber().isNotEmpty()) {
-            dataList.addAll(Pref.getSMSNumber().split("$"))
+        if (Pref.smsNumber.isNotEmpty()) {
+            dataList.addAll(Pref.smsNumber.split("$"))
             adapter.submitList(dataList)
         }
     }
@@ -39,10 +39,10 @@ class AddSMSNumberFragment : Fragment(R.layout.fragment_add_s_m_s_number) {
 
         save.setOnClickListener {
             if (number.text!!.isNotEmpty() && number.unMaskedText?.length == 12) {
-                if (Pref.getSMSNumber().isEmpty())
-                    Pref.setSMSNumber(Pref.getSMSNumber().plus(number.unMaskedText))
+                if (Pref.smsNumber.isEmpty())
+                    Pref.smsNumber = Pref.smsNumber.plus(number.unMaskedText)
                 else
-                    Pref.setSMSNumber(Pref.getSMSNumber().plus("$+").plus(number.unMaskedText))
+                    Pref.smsNumber = Pref.smsNumber.plus("$+").plus(number.unMaskedText)
                 dataList.add("+" + number.unMaskedText.toString())
                 adapter.submitList(dataList)
                 adapter.notifyDataSetChanged()
@@ -54,7 +54,7 @@ class AddSMSNumberFragment : Fragment(R.layout.fragment_add_s_m_s_number) {
     private fun deleteNumber(position: Int) {
         dataList.removeAt(position)
         adapter.notifyItemRemoved(position)
-        Pref.setSMSNumber(getNumbersStr())
+        Pref.smsNumber = getNumbersStr()
     }
 
     private fun getNumbersStr(): String {

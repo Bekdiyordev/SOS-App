@@ -2,6 +2,7 @@ package uz.beko404.sosapp
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 
 object Pref {
 
@@ -13,40 +14,35 @@ object Pref {
         pref = sharedPreferences
     }
 
-    fun getPreferences(): SharedPreferences {
-        return sharedPreferences
-    }
+    var smsNumber: String
+        get() = pref.getString("sms", "+998995006123")!!
+        set(value) = pref.edit { putString("sms", value) }
 
-    fun setNumber(number: String) {
-        pref.edit().apply {
-            putString("number", number)
-            apply()
-        }
-    }
+    var isLocationEnabled: Boolean
+        get() = pref.getBoolean("location", false)
+        set(value) = pref.edit { putBoolean("location", value) }
 
-    fun getNumber(): String {
-        return pref.getString("number", "+998995006123")!!
-    }
+    var latitude: Float
+        get() = pref.getFloat("latitude", 41.841812f)
+        set(value) = pref.edit { putFloat("latitude", value) }
 
-    fun setSMSNumber(number: String) {
-        pref.edit().apply {
-            putString("sms", number)
-            apply()
-        }
-    }
+    var longitude: Float
+        get() = pref.getFloat("longitude", 60.391438f)
+        set(value) = pref.edit { putFloat("longitude", value) }
 
-    fun getSMSNumber(): String {
-        return pref.getString("sms", "+998995006123")!!
-    }
+    var locationPermissionFine: Boolean
+        get() = pref.getBoolean("locationPermissionFine", false)
+        set(value) = pref.edit { putBoolean("locationPermissionFine", value) }
 
-    fun setLocationEnabled(state: Boolean) {
-        pref.edit().apply {
-            putBoolean("location", state)
-            apply()
-        }
-    }
+    var isFind: Boolean
+        get() = pref.getBoolean("isFind", false)
+        set(value) = pref.edit { putBoolean("isFind", value) }
 
-    fun isLocationEnabled(): Boolean {
-        return pref.getBoolean("location", false)
-    }
+    var time: Long
+        get() = pref.getLong("time", 1)
+        set(value) = pref.edit { putLong("time", value) }
+
+    var distance: Int
+        get() = pref.getInt("distance", 50)
+        set(value) = pref.edit { putInt("distance", value) }
 }

@@ -35,8 +35,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
         }
 
+        location.isChecked = Pref.isLocationEnabled
         location.setOnCheckedChangeListener { _, isChecked ->
-            Pref.setLocationEnabled(isChecked)
+            Pref.isLocationEnabled = isChecked
         }
     }
 }

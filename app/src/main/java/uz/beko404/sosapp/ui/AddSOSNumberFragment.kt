@@ -24,13 +24,13 @@ class AddSOSNumberFragment : Fragment(R.layout.fragment_add_s_o_s_number) {
             findNavController().navigateUp()
         }
 
-        if (Pref.getNumber().isNotEmpty())
-            number.setText(Pref.getNumber())
+        time.setText(Pref.time.toString())
+        distance.setText(Pref.distance.toString())
 
         save.setOnClickListener {
-            if (number.text!!.isNotEmpty() && number.unMaskedText?.length == 12) {
-                Pref.setNumber(number.text.toString())
-                Toast.makeText(requireContext(), getString(R.string.success), Toast.LENGTH_SHORT).show()
+            if (time.text!!.isNotEmpty() && distance.text!!.isNotEmpty()) {
+                Pref.time = time.text.toString().toLong()
+                Pref.distance = distance.text.toString().toInt()
                 findNavController().navigateUp()
             } else
                 Toast.makeText(requireContext(), getString(R.string.enter_number), Toast.LENGTH_SHORT).show()

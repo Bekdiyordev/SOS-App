@@ -58,5 +58,11 @@ dependencies {
 
     implementation("com.mapbox.maps:android:11.2.0")
 
+    implementation ("com.google.android.gms:play-services-location:21.1.0")
+    implementation ("com.google.maps.android:android-maps-utils:3.5.3")
+
+    implementation("com.vmadalin:easypermissions-ktx:1.0.0")
+
+
 
 }
