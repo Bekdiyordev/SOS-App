@@ -62,7 +62,7 @@ class MapFragment : Fragment(R.layout.fragment_map), PermissionsListener {
         super.onViewCreated(view, savedInstanceState)
         if (!::mapView.isInitialized) {
             mapView = binding.mapView
-            onMapReady(mapboxMap = mapView.getMapboxMap())
+            onMapReady(mapboxMap = mapView.mapboxMap)
         }
     }
 
@@ -71,11 +71,13 @@ class MapFragment : Fragment(R.layout.fragment_map), PermissionsListener {
         mapView.compass.enabled = false
         mapView.scalebar.enabled = false
         mapView.gestures.rotateEnabled = false
-        mapView.gestures.scrollEnabled = true
+        mapView.gestures.scrollEnabled = false
+        mapView.compass.visibility = false
+        mapView.scalebar.enabled = false
 
         map.setCamera(
             CameraOptions.Builder().center(
-                Point.fromLngLat(60.391438, 41.841812)
+                Point.fromLngLat(41.5517723473732, 60.63137433822857)
             )
                 .zoom(12.0)
                 .build()
@@ -83,6 +85,11 @@ class MapFragment : Fragment(R.layout.fragment_map), PermissionsListener {
 
         val style =  Style.MAPBOX_STREETS
 
+        map.loadStyle(
+            (style(style) {
+                initLocationComponent()
+            })
+        )
 
         map.setBounds(CameraBoundsOptions.Builder().maxZoom(18.0).minZoom(8.0).build())
         mapView.attribution.enabled = false
