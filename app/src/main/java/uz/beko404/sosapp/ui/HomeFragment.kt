@@ -115,8 +115,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), SensorEventListener {
 
     override fun onPause() {
         super.onPause()
-        if (mediaPlayer != null)
-            mediaPlayer?.release()
+        mediaPlayer?.release()
         sensorManager.unregisterListener(this)
     }
 
@@ -152,7 +151,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), SensorEventListener {
         sos.setOnClickListener {
             if (!Pref.isFind) {
                 Pref.isFind = true
-                mediaPlayer?.pause()
+                mediaPlayer?.release()
                 playSound()
             }
             sendSMS()
@@ -217,8 +216,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), SensorEventListener {
         mediaPlayer?.start()
 
         // Set maximum volume
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume / 2, 0)
+//        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+//        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume / 2, 0)
 
         mediaPlayer?.setOnCompletionListener {
             Pref.isFind = false
